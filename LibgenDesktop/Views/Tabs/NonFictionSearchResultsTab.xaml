@@ -1,0 +1,164 @@
+﻿<UserControl x:Class="LibgenDesktop.Views.Tabs.NonFictionSearchResultsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:LibgenDesktop.Views.Controls"
+             xmlns:const="clr-namespace:LibgenDesktop.Common"
+             xmlns:u="clr-namespace:LibgenDesktop.Views.Utils"
+             u:EventListenerExtensions.EventProvider="{Binding Events}">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/LibgenDesktop;component/Views/Styles/NonFictionSearchResultsTabStyles.xaml" />
+    </UserControl.Resources>
+    <Grid Style="{StaticResource TopContainer}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox Name="searchTextBox" Grid.Column="0" Style="{StaticResource SearchTextBox}"
+                     md:HintAssist.Hint="{Binding Localization.SearchPlaceHolder}" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
+                     ToolTipService.ToolTip="{Binding Localization.SearchBoxTooltip}">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding SearchCommand}" Key="Enter" />
+                </TextBox.InputBindings>
+            </TextBox>
+            <Button Grid.Column="1" Command="{Binding ToggleBookmarkCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource BookmarkButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsBookmarkSet}" Value="True">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <md:PackIcon Style="{StaticResource BookmarkSetIcon}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="ToolTip" Value="{Binding Localization.RemoveFromBookmarksTooltip}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsBookmarkSet}" Value="False">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <md:PackIcon Style="{StaticResource BookmarkNotSetIcon}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="ToolTip" Value="{Binding Localization.AddToBookmarksTooltip}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Grid.Column="2" Command="{Binding ToggleExportPanelCommand}" Style="{StaticResource ExportButton}"
+                    ToolTip="{Binding Localization.ExportButtonTooltip}"
+                    IsEnabled="{Binding IsExportPanelVisible, Converter={StaticResource booleanInverseConverter}}" />
+        </Grid>
+        <c:BookDataGrid x:Name="bookGrid" Grid.Row="1" ItemsSource="{Binding Books, IsAsync=True}"
+                        SelectedRows="{Binding SelectedRows, Mode=OneWayToSource}"
+                        Visibility="{Binding IsSearchResultsGridVisible, Converter={StaticResource booleanToCollapsedConverter}}"
+                        Style="{StaticResource BookDataGrid}">
+            <DataGrid.Resources>
+                <u:BindingProxy x:Key="dataGridViewModel" DataContext="{Binding}" />
+                <c:BookDataGridContextMenu x:Key="dataGridRowMenu" />
+            </DataGrid.Resources>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                    <Setter Property="u:DataGridExtensions.DoubleClickCommand" Value="{Binding ElementName=bookGrid, Path=DataContext.OpenDetailsCommand}" />
+                    <Setter Property="ContextMenu" Value="{StaticResource dataGridRowMenu}" />
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.InputBindings>
+                <KeyBinding Command="{Binding OpenDetailsCommand}" Key="Enter" />
+            </DataGrid.InputBindings>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Title}"
+                                    Header="{Binding DataContext.Localization.Columns.Title, Source={StaticResource dataGridViewModel}}"
+                                    Width="{Binding DataContext.TitleColumnWidth, Source={StaticResource dataGridViewModel}, Converter={StaticResource dataGridLengthConverter}, Mode=TwoWay}"
+                                    MinWidth="{Binding Source={x:Static const:Constants.NON_FICTION_GRID_TITLE_COLUMN_MIN_WIDTH}}"
+                                    HeaderStyle="{StaticResource TitleHeaderStyle}" ElementStyle="{StaticResource TitleColumnStyle}" />
+                <DataGridTextColumn Binding="{Binding Authors}"
+                                    Header="{Binding DataContext.Localization.Columns.Authors, Source={StaticResource dataGridViewModel}}"
+                                    Width="{Binding DataContext.AuthorsColumnWidth, Source={StaticResource dataGridViewModel}, Converter={StaticResource dataGridLengthConverter}, Mode=TwoWay}"
+                                    MinWidth="{Binding Source={x:Static const:Constants.NON_FICTION_GRID_AUTHORS_COLUMN_MIN_WIDTH}}"
+                                    HeaderStyle="{StaticResource AuthorsHeaderStyle}" ElementStyle="{StaticResource AuthorsColumnStyle}" />
+                <DataGridTextColumn Binding="{Binding Series}"
+                                    Header="{Binding DataContext.Localization.Columns.Series, Source={StaticResource dataGridViewModel}}"
+                                    Width="{Binding DataContext.SeriesColumnWidth, Source={StaticResource dataGridViewModel}, Converter={StaticResource dataGridLengthConverter}, Mode=TwoWay}"
+                                    MinWidth="{Binding Source={x:Static const:Constants.NON_FICTION_GRID_SERIES_COLUMN_MIN_WIDTH}}"
+                                    HeaderStyle="{StaticResource SeriesHeaderStyle}" ElementStyle="{StaticResource SeriesColumnStyle}" />
+                <DataGridTextColumn Binding="{Binding Year}"
+                                    Header="{Binding DataContext.Localization.Columns.Year, Source={StaticResource dataGridViewModel}}"
+                                    Width="{Binding DataContext.YearColumnWidth, Source={StaticResource dataGridViewModel}, Converter={StaticResource dataGridLengthConverter}, Mode=TwoWay}"
+                                    MinWidth="{Binding Source={x:Static const:Constants.NON_FICTION_GRID_YEAR_COLUMN_MIN_WIDTH}}"
+                                    HeaderStyle="{StaticResource YearHeaderStyle}" ElementStyle="{StaticResource YearColumnStyle}" />
+                <DataGridTextColumn Binding="{Binding Publisher}"
+                                    Header="{Binding DataContext.Localization.Columns.Publisher, Source={StaticResource dataGridViewModel}}"
+                                    Width="{Binding DataContext.PublisherColumnWidth, Source={StaticResource dataGridViewModel}, Converter={StaticResource dataGridLengthConverter}, Mode=TwoWay}"
+                                    MinWidth="{Binding Source={x:Static const:Constants.NON_FICTION_GRID_PUBLISHER_COLUMN_MIN_WIDTH}}"
+                                    HeaderStyle="{StaticResource PublisherHeaderStyle}" ElementStyle="{StaticResource PublisherColumnStyle}" />
+                <DataGridTextColumn Binding="{Binding Format}"
+                                    Header="{Binding DataContext.Localization.Columns.FormatColumn, Source={StaticResource dataGridViewModel}}"
+                                    Width="{Binding DataContext.FormatColumnWidth, Source={StaticResource dataGridViewModel}, Converter={StaticResource dataGridLengthConverter}, Mode=TwoWay}"
+                                    MinWidth="{Binding Source={x:Static const:Constants.NON_FICTION_GRID_FORMAT_COLUMN_MIN_WIDTH}}"
+                                    HeaderStyle="{StaticResource FormatHeaderStyle}" ElementStyle="{StaticResource FormatColumnStyle}" />
+                <DataGridTextColumn Binding="{Binding FileSize}"
+                                    Header="{Binding DataContext.Localization.Columns.FileSize, Source={StaticResource dataGridViewModel}}" SortMemberPath="SizeInBytes"
+                                    Width="{Binding DataContext.FileSizeColumnWidth, Source={StaticResource dataGridViewModel}, Converter={StaticResource dataGridLengthConverter}, Mode=TwoWay}"
+                                    MinWidth="{Binding Source={x:Static const:Constants.NON_FICTION_GRID_FILESIZE_COLUMN_MIN_WIDTH}}"
+                                    HeaderStyle="{StaticResource FileSizeHeaderStyle}" ElementStyle="{StaticResource FileSizeColumnStyle}" />
+                <DataGridTemplateColumn Header="{Binding DataContext.Localization.Columns.Ocr, Source={StaticResource dataGridViewModel}}"
+                                        SortMemberPath="Ocr"
+                                        Width="{Binding DataContext.OcrColumnWidth, Source={StaticResource dataGridViewModel}, Converter={StaticResource dataGridLengthConverter}, Mode=TwoWay}"
+                                        MinWidth="{Binding Source={x:Static const:Constants.NON_FICTION_GRID_OCR_COLUMN_MIN_WIDTH}}"
+                                        HeaderStyle="{StaticResource OcrHeaderStyle}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentControl Name="tickMarkContainer" Content="{StaticResource tickMark}" Visibility="Hidden" />
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Ocr}" Value="True">
+                                    <Setter TargetName="tickMarkContainer" Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn SortMemberPath="ExistsInLibrary"
+                                        Width="{Binding DataContext.ExistsInLibraryColumnWidth, Source={StaticResource dataGridViewModel}, Converter={StaticResource dataGridLengthConverter}, Mode=TwoWay}"
+                                        MinWidth="{Binding Source={x:Static const:Constants.NON_FICTION_GRID_EXISTS_IN_LIBRARY_COLUMN_MIN_WIDTH}}"
+                                        HeaderStyle="{StaticResource ExistsInLibraryHeaderStyle}">
+                    <DataGridTemplateColumn.Header>
+                        <md:PackIcon Kind="BookMultiple"
+                                     ToolTip="{Binding DataContext.Localization.Columns.InLocalLibrary, Source={StaticResource dataGridViewModel}}" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentControl Name="tickMarkContainer" Content="{StaticResource tickMark}" Visibility="Hidden" />
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding ExistsInLibrary}" Value="True">
+                                    <Setter TargetName="tickMarkContainer" Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </c:BookDataGrid>
+        <StackPanel Grid.Row="1" Style="{StaticResource BookSearchProgressPanel}"
+                    Visibility="{Binding IsSearchProgressPanelVisible, Converter={StaticResource booleanToCollapsedConverter}}">
+            <StackPanel Style="{StaticResource SearchProgressHeader}">
+                <ProgressBar Style="{StaticResource SearchProgressHeaderProgressBar}" />
+                <TextBlock Text="{Binding Localization.SearchInProgress}" Style="{StaticResource SearchProgressHeaderLabel}" />
+            </StackPanel>
+            <TextBlock Text="{Binding SearchProgressStatus}" Style="{StaticResource SearchProgressStatus}" />
+            <Button Content="{Binding InterruptButtonText}" Style="{StaticResource InterruptSearchButton}"
+                    IsEnabled="{Binding IsInterruptButtonEnabled}" Command="{Binding InterruptSearchCommand}" />
+        </StackPanel>
+        <TextBlock Grid.Row="2" Text="{Binding BookCount}" Style="{StaticResource StatusBarText}"
+                   Visibility="{Binding IsStatusBarVisible, Converter={StaticResource booleanToCollapsedConverter}}" />
+        <c:ExportPanel Grid.Row="1" Grid.RowSpan="2" DataContext="{Binding ExportPanelViewModel}"
+                       Visibility="{Binding DataContext.IsExportPanelVisible, Converter={StaticResource booleanToCollapsedConverter}, RelativeSource={RelativeSource AncestorType=Grid, Mode=FindAncestor}}" />
+    </Grid>
+</UserControl>

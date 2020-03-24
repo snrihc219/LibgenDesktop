@@ -1,0 +1,794 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7158E1EB-44F7-4C26-BF9A-DA055F85D0BB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>LibgenDesktop</RootNamespace>
+    <AssemblyName>LibgenDesktop</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug x86|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug x86\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\app_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug x64|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug x64\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.8.10.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.8.10\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors">
+      <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.5\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpCompress, Version=0.22.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.22.0\lib\net45\SharpCompress.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.109.2\lib\net45\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WpfMouseWheelLib">
+      <HintPath>..\Libraries\WpfMouseWheelLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\Environment.cs" />
+    <Compile Include="Infrastructure\EventProvider.cs" />
+    <Compile Include="Infrastructure\FuncCommand.cs" />
+    <Compile Include="Infrastructure\IEventListener.cs" />
+    <Compile Include="Infrastructure\IMessageBox.cs" />
+    <Compile Include="Infrastructure\IWindowContext.cs" />
+    <Compile Include="Infrastructure\MessageBox.cs" />
+    <Compile Include="Infrastructure\OpenFileDialogParameters.cs" />
+    <Compile Include="Infrastructure\OpenFileDialogResult.cs" />
+    <Compile Include="Infrastructure\RegisteredWindows.cs" />
+    <Compile Include="Infrastructure\SaveFileDialogParameters.cs" />
+    <Compile Include="Infrastructure\SaveFileDialogResult.cs" />
+    <Compile Include="Infrastructure\SelectFolderDialogParameters.cs" />
+    <Compile Include="Infrastructure\SelectFolderDialogResult.cs" />
+    <Compile Include="Infrastructure\SelectionChangedCommandArgs.cs" />
+    <Compile Include="Infrastructure\ViewModelEvent.cs" />
+    <Compile Include="Infrastructure\WindowContext.cs" />
+    <Compile Include="Infrastructure\WindowManager.cs" />
+    <Compile Include="Common\Logger.cs" />
+    <Compile Include="Models\Database\DatabaseStats.cs" />
+    <Compile Include="Models\Database\Migration.cs" />
+    <Compile Include="Models\Database\SearchQueryParser.cs" />
+    <Compile Include="Models\Download\CoverCache.cs" />
+    <Compile Include="Models\Download\Downloader.cs" />
+    <Compile Include="Models\Download\DownloaderBatchEventArgs.cs" />
+    <Compile Include="Models\Download\DownloaderEventArgs.cs" />
+    <Compile Include="Models\Download\DownloadItem.cs" />
+    <Compile Include="Models\Download\DownloadItemLogLine.cs" />
+    <Compile Include="Models\Download\DownloadItemLogLineType.cs" />
+    <Compile Include="Models\Download\DownloadItemRequest.cs" />
+    <Compile Include="Models\Download\DownloadItemStatus.cs" />
+    <Compile Include="Models\Download\DownloadQueueStorage.cs" />
+    <Compile Include="Models\Entities\DatabaseMetadata.cs" />
+    <Compile Include="Models\Entities\FictionBook.cs" />
+    <Compile Include="Models\Entities\LibgenObject.cs" />
+    <Compile Include="Models\Entities\LibgenObjectType.cs" />
+    <Compile Include="Models\Entities\LibraryFile.cs" />
+    <Compile Include="Models\Entities\SciMagArticle.cs" />
+    <Compile Include="Models\Export\XlsxExporter.cs" />
+    <Compile Include="Models\Export\CsvExporter.cs" />
+    <Compile Include="Models\Export\XlsxExportWriter.cs" />
+    <Compile Include="Models\Export\CsvExportWriter.cs" />
+    <Compile Include="Models\Export\Exporter.cs" />
+    <Compile Include="Models\Export\ExportObject.cs" />
+    <Compile Include="Models\Export\ExportResult.cs" />
+    <Compile Include="Models\Export\ExportWriter.cs" />
+    <Compile Include="Models\Export\SciMagExportObject.cs" />
+    <Compile Include="Models\Export\FictionExportObject.cs" />
+    <Compile Include="Models\Export\NonFictionExportObject.cs" />
+    <Compile Include="Models\Import\FictionImporter.cs" />
+    <Compile Include="Models\Import\SciMagImporter.cs" />
+    <Compile Include="Models\JsonApi\JsonApiClient.cs" />
+    <Compile Include="Models\JsonApi\JsonApiNonFictionBook.cs" />
+    <Compile Include="Models\Localization\Language.cs" />
+    <Compile Include="Models\Localization\Localizators\ApplicationUpdateLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\CommonDetailsTabLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\AboutWindowLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\SqlDebuggerWindowLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\LibraryTabLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\DatabaseWindowLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\CreateDatabaseWindowLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\DetailsTabLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\DownloadManagerLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\ErrorWindowLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\ExporterLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\ExportPanelLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\FictionDetailsTabLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\ImportLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\MessageBoxLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\NonFictionDetailsTabLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\FictionExporterLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\SciMagExporterLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\NonFictionExporterLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\SciMagDetailsTabLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\SciMagSearchResultsGridColumnsLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\SciMagSearchResultsTabLocalizator.cs" />
+    <Compile Include="Models\Localization\LanguageFormatter.cs" />
+    <Compile Include="Models\Localization\Localizators\Localizator.cs" />
+    <Compile Include="Models\Localization\LocalizationStorage.cs" />
+    <Compile Include="Models\Localization\Localizators\MainWindowLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\FictionSearchResultsGridColumnsLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\NonFictionSearchResultsGridColumnsLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\FictionSearchResultsTabLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\NonFictionSearchResultsTabLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\SearchResultsTabLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\SearchTabLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\SettingsWindowLocalizator.cs" />
+    <Compile Include="Models\Localization\Localizators\SynchronizationLocalizator.cs" />
+    <Compile Include="Models\Localization\Translation.cs" />
+    <Compile Include="Models\ProgressArgs\DownloadFileProgress.cs" />
+    <Compile Include="Models\ProgressArgs\GenericProgress.cs" />
+    <Compile Include="Models\ProgressArgs\ImportCreateIndexProgress.cs" />
+    <Compile Include="Models\ProgressArgs\SynchronizationDiskSpaceProgress.cs" />
+    <Compile Include="Models\ProgressArgs\ImportDiskSpaceProgress.cs" />
+    <Compile Include="Models\ProgressArgs\ImportLoadLibgenIdsProgress.cs" />
+    <Compile Include="Models\ProgressArgs\ImportObjectsProgress.cs" />
+    <Compile Include="Models\ProgressArgs\ImportSearchTableDefinitionProgress.cs" />
+    <Compile Include="Models\ProgressArgs\ImportTableDefinitionFoundProgress.cs" />
+    <Compile Include="Models\ProgressArgs\ExportProgress.cs" />
+    <Compile Include="Models\ProgressArgs\ScanUnknownProgress.cs" />
+    <Compile Include="Models\ProgressArgs\ScanCompleteProgress.cs" />
+    <Compile Include="Models\ProgressArgs\ScanProgress.cs" />
+    <Compile Include="Models\ProgressArgs\SearchProgress.cs" />
+    <Compile Include="Models\ProgressArgs\SynchronizationObjectsProgress.cs" />
+    <Compile Include="Models\Settings\Mirrors.cs" />
+    <Compile Include="Models\Settings\MirrorStorage.cs" />
+    <Compile Include="Models\SqlDump\ColumnDefinition.cs" />
+    <Compile Include="Models\SqlDump\ColumnType.cs" />
+    <Compile Include="Models\Import\Importer.cs" />
+    <Compile Include="Models\Import\NonFictionImporter.cs" />
+    <Compile Include="Models\SqlDump\PositioningStreamReader.cs" />
+    <Compile Include="Models\SqlDump\SqlDumpReader.cs" />
+    <Compile Include="Models\SqlDump\TableDefinition.cs" />
+    <Compile Include="Models\SqlDump\TableDefinitions.cs" />
+    <Compile Include="Models\SqlDump\TableType.cs" />
+    <Compile Include="Models\Update\GitHubApiRelease.cs" />
+    <Compile Include="Models\Update\Updater.cs" />
+    <Compile Include="Models\Utils\ExceptionUtils.cs" />
+    <Compile Include="Models\Utils\FileUtils.cs" />
+    <Compile Include="Models\Utils\NetworkUtils.cs" />
+    <Compile Include="Models\Utils\StringExtensions.cs" />
+    <Compile Include="Models\Utils\UrlGenerator.cs" />
+    <Compile Include="ViewModels\Bookmarks\BookmarkViewModelList.cs" />
+    <Compile Include="ViewModels\Bookmarks\BookmarkViewModel.cs" />
+    <Compile Include="ViewModels\ContainerViewModel.cs" />
+    <Compile Include="ViewModels\DetailsItems\DetailsItemViewModel.cs" />
+    <Compile Include="ViewModels\DetailsItems\FictionDetailsItemViewModel.cs" />
+    <Compile Include="ViewModels\DetailsItems\NonFictionDetailsItemViewModel.cs" />
+    <Compile Include="ViewModels\DetailsItems\SciMagDetailsItemViewModel.cs" />
+    <Compile Include="ViewModels\Library\SciMagScanResultItemViewModel.cs" />
+    <Compile Include="ViewModels\Library\FictionScanResultItemViewModel.cs" />
+    <Compile Include="ViewModels\Library\NonFictionScanResultItemViewModel.cs" />
+    <Compile Include="ViewModels\Library\ScanResultItemViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\ISearchResultsTabViewModel.cs" />
+    <Compile Include="ViewModels\SearchResultItems\SciMagSearchResultItemViewModel.cs" />
+    <Compile Include="ViewModels\SearchResultItems\FictionSearchResultItemViewModel.cs" />
+    <Compile Include="ViewModels\SearchResultItems\NonFictionSearchResultItemViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\ITabViewModel.cs" />
+    <Compile Include="ViewModels\Windows\ApplicationUpdateWindowViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\DetailsTabViewModel.cs" />
+    <Compile Include="ViewModels\Windows\AboutWindowViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\LibraryTabViewModel.cs" />
+    <Compile Include="ViewModels\Windows\DatabaseWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\DetailsWindowViewModel.cs" />
+    <Compile Include="ViewModels\EventArguments\OpenFictionDetailsEventArgs.cs" />
+    <Compile Include="ViewModels\EventArguments\OpenNonFictionDetailsEventArgs.cs" />
+    <Compile Include="ViewModels\EventArguments\OpenSciMagDetailsEventArgs.cs" />
+    <Compile Include="ViewModels\EventArguments\SearchCompleteEventArgs.cs" />
+    <Compile Include="ViewModels\Panels\ExportPanelViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\FictionDetailsTabViewModel.cs" />
+    <Compile Include="ViewModels\Panels\ImportLogPanelViewModel.cs" />
+    <Compile Include="ViewModels\Windows\SqlDebuggerWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\LibgenWindowViewModel.cs" />
+    <Compile Include="ViewModels\SearchResultItems\SearchResultItemViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\SearchResultsTabViewModel.cs" />
+    <Compile Include="ViewModels\EventArguments\SelectDownloadEventArgs.cs" />
+    <Compile Include="ViewModels\Windows\SynchronizationWindowViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\NonFictionDetailsTabViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\SciMagDetailsTabViewModel.cs" />
+    <Compile Include="ViewModels\Windows\SciMagDetailsWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\FictionDetailsWindowViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\SciMagSearchResultsTabViewModel.cs" />
+    <Compile Include="ViewModels\Windows\NonFictionDetailsWindowViewModel.cs" />
+    <Compile Include="Infrastructure\Command.cs" />
+    <Compile Include="ViewModels\Windows\CreateDatabaseWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\ErrorWindowViewModel.cs" />
+    <Compile Include="ViewModels\Windows\ImportWindowViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\FictionSearchResultsTabViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\NonFictionSearchResultsTabViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\DownloadManagerTabViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\SearchTabViewModel.cs" />
+    <Compile Include="ViewModels\Windows\SettingsWindowViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\TabViewModel.cs" />
+    <Compile Include="Views\Controls\BookDataGrid.cs" />
+    <Compile Include="Views\Controls\BookDataGridContextMenu.xaml.cs">
+      <DependentUpon>BookDataGridContextMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\HorizontalScrollViewer.cs" />
+    <Compile Include="Views\Controls\LibraryTabHeader.xaml.cs">
+      <DependentUpon>LibraryTabHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Utils\IconExtension.cs" />
+    <Compile Include="Views\Windows\ApplicationUpdateWindow.xaml.cs">
+      <DependentUpon>ApplicationUpdateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\AddTabButton.xaml.cs">
+      <DependentUpon>AddTabButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\AutoScrollViewer.cs" />
+    <Compile Include="Views\Controls\CloseTabButton.xaml.cs">
+      <DependentUpon>CloseTabButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\DownloaderListBox.cs" />
+    <Compile Include="Views\Controls\ExportPanel.xaml.cs">
+      <DependentUpon>ExportPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ImportLogPanel.xaml.cs">
+      <DependentUpon>ImportLogPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\PressedToggleButton.xaml.cs">
+      <DependentUpon>PressedToggleButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\TabControl.cs" />
+    <Compile Include="Views\Windows\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\LibraryTab.xaml.cs">
+      <DependentUpon>LibraryTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\DatabaseWindow.xaml.cs">
+      <DependentUpon>DatabaseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\SqlDebuggerWindow.xaml.cs">
+      <DependentUpon>SqlDebuggerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\MessageBoxWindow.xaml.cs">
+      <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\SynchronizationWindow.xaml.cs">
+      <DependentUpon>SynchronizationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\SciMagDetailsWindow.xaml.cs">
+      <DependentUpon>SciMagDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\FictionDetailsWindow.xaml.cs">
+      <DependentUpon>FictionDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\NonFictionDetailsWindow.xaml.cs">
+      <DependentUpon>NonFictionDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\BookAttributeValueLabel.xaml.cs">
+      <DependentUpon>BookAttributeValueLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ControlExtensions.cs" />
+    <Compile Include="Views\Controls\LibgenDesktopWindow.cs" />
+    <Compile Include="Views\Controls\PressedSwitch.xaml.cs">
+      <DependentUpon>PressedSwitch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\SettingsTabHeader.xaml.cs">
+      <DependentUpon>SettingsTabHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\Toolbar.xaml.cs">
+      <DependentUpon>Toolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\CreateDatabaseWindow.xaml.cs">
+      <DependentUpon>CreateDatabaseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\ErrorWindow.xaml.cs">
+      <DependentUpon>ErrorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\ImportWindow.xaml.cs">
+      <DependentUpon>ImportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\FictionDetailsTab.xaml.cs">
+      <DependentUpon>FictionDetailsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\NonFictionDetailsTab.xaml.cs">
+      <DependentUpon>NonFictionDetailsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\SciMagDetailsTab.xaml.cs">
+      <DependentUpon>SciMagDetailsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\SciMagSearchResultsTab.xaml.cs">
+      <DependentUpon>SciMagSearchResultsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\FictionSearchResultsTab.xaml.cs">
+      <DependentUpon>FictionSearchResultsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\NonFictionSearchResultsTab.xaml.cs">
+      <DependentUpon>NonFictionSearchResultsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\DownloadManagerTab.xaml.cs">
+      <DependentUpon>DownloadManagerTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\SearchTab.xaml.cs">
+      <DependentUpon>SearchTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Utils\BindingProxy.cs" />
+    <Compile Include="Views\Utils\BooleanInverseConverter.cs" />
+    <Compile Include="Views\Utils\BooleanToWindowStateConverter.cs" />
+    <Compile Include="Views\Utils\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Views\Utils\DataGridExtensions.cs" />
+    <Compile Include="Views\Utils\DataGridLengthConverter.cs" />
+    <Compile Include="Views\Utils\EventListenerExtensions.cs" />
+    <Compile Include="Views\Utils\GridLengthConverter.cs" />
+    <Compile Include="Views\Utils\PasswordBoxExtensions.cs" />
+    <Page Include="Views\Controls\BookDataGridContextMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\LibraryTabHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\AboutWindowStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\SqlDebuggerWindowStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\LibraryTabStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\DatabaseWindowStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Windows\ApplicationUpdateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\AddTabButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\CloseTabButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ExportPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ImportLogPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\PressedToggleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\AboutWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Tabs\LibraryTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Windows\DatabaseWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Windows\SqlDebuggerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Windows\MessageBoxWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\ApplicationUpdateWindowStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\ExportPanelStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\ImportLogPanelStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\MessageBoxWindowStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\SynchronizationWindowStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Windows\SynchronizationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Windows\SciMagDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Windows\FictionDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Windows\NonFictionDetailsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\BookAttributeValueLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\PressedSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\SettingsTabHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\Toolbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\CreateDatabaseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\ErrorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\ImportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Database\LocalDatabase.cs" />
+    <Compile Include="Models\Database\SqlScripts.cs" />
+    <Compile Include="Models\Entities\NonFictionBook.cs" />
+    <Compile Include="Models\MainModel.cs" />
+    <Compile Include="Models\Settings\AppSettings.cs" />
+    <Compile Include="Models\Settings\SettingsStorage.cs" />
+    <Compile Include="ViewModels\Windows\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="Views\Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\Styles\DownloadManagerTabStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\NonFictionDetailsTabStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\SciMagSearchResultsTabStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\SciMagDetailsTabStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\FictionSearchResultsTabStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\FictionDetailsTabStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\NonFictionSearchResultsTabStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\TabStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\ToolbarStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tabs\FictionDetailsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tabs\NonFictionDetailsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tabs\SciMagDetailsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tabs\SciMagSearchResultsTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Tabs\FictionSearchResultsTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Tabs\NonFictionSearchResultsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tabs\DownloadManagerTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Tabs\SearchTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\CommonStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\ErrorWindowStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\CreateDatabaseWindowStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\MainWindowStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\SearchTabStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\ImportWindowStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\SettingsWindowStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\TabControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Styles\WindowStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <ContentWithTargetPath Include="Resources\Mirrors\mirrors.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Mirrors\mirrors.config</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Mirrors\libgen_lc_nonfiction.xslt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Mirrors\libgen_lc_nonfiction.xslt</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Mirrors\libgen_lc_fiction.xslt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Mirrors\libgen_lc_fiction.xslt</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Mirrors\libgen_lc_scimag.xslt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Mirrors\libgen_lc_scimag.xslt</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Mirrors\booklid_org_step1.xslt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Mirrors\booklid_org_step1.xslt</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Mirrors\booklid_org_step2.xslt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Mirrors\booklid_org_step2.xslt</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Mirrors\b_ok_xyz_step1.xslt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Mirrors\b_ok_xyz_step1.xslt</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Mirrors\b_ok_xyz_step2.xslt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Mirrors\b_ok_xyz_step2.xslt</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Mirrors\booksc_org_step1.xslt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Mirrors\booksc_org_step1.xslt</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Mirrors\booksc_org_step2.xslt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Mirrors\booksc_org_step2.xslt</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Mirrors\sci-hub.xslt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Mirrors\sci-hub.xslt</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Languages\Russian.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Languages\Russian.lng</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Languages\English.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Languages\English.lng</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Languages\Romanian.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Languages\Romanian.lng</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Languages\Ukrainian.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Languages\Ukrainian.lng</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Languages\Spanish.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Languages\Spanish.lng</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Languages\French.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Languages\French.lng</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Languages\Simplified Chinese.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Languages\Simplified Chinese.lng</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Resources\Languages\Turkish.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Languages\Turkish.lng</TargetPath>
+    </ContentWithTargetPath>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\app_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\LibgenDesktop_logo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.109.2\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.109.2\build\net45\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.109.2\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.109.2\build\net45\System.Data.SQLite.Core.targets'))" />
+  </Target>
+</Project>

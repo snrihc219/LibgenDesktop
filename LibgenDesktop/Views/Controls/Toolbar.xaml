@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="LibgenDesktop.Views.Controls.Toolbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:c="clr-namespace:LibgenDesktop.Views.Controls">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/LibgenDesktop;component/Views/Styles/ToolbarStyles.xaml" />
+    </UserControl.Resources>
+    <StackPanel Style="{StaticResource TopContainer}">
+        <md:Badged>
+            <md:Badged.Style>
+                <Style TargetType="md:Badged" BasedOn="{StaticResource DownloadBadge}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsCompletedDownloadCounterVisible}" Value="True">
+                            <Setter Property="Badge">
+                                <Setter.Value>
+                                    <TextBlock Text="{Binding CompletedDownloadCount}" Style="{StaticResource DownloadBadgeText}" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </md:Badged.Style>
+            <Button	Command="{Binding DownloadManagerCommand}" ToolTip="{Binding Localization.ToolbarDownloadManagerTooltip}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource DownloadManagerButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDownloadManagerButtonHighlighted}" Value="True">
+                                <Setter Property="Foreground"
+                                    Value="{Binding HighlightedIconForeground, RelativeSource={RelativeSource FindAncestor, AncestorType=c:Toolbar}}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </md:Badged>
+        <md:PopupBox Style="{StaticResource BookmarkPopupBox}">
+            <md:PopupBox.ToggleContent>
+                <md:PackIcon Style="{StaticResource BookmarkIcon}" ToolTip="{Binding Localization.ToolbarBookmarksTooltip}" />
+            </md:PopupBox.ToggleContent>
+            <ItemsControl ItemsSource="{Binding Bookmarks}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Name}" IsEnabled="{Binding IsEnabled}"
+                                Command="{Binding DataContext.BookmarkCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=c:Toolbar}}"
+                                CommandParameter="{Binding}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </md:PopupBox>
+        <md:Badged>
+            <md:Badged.Style>
+                <Style TargetType="md:Badged" BasedOn="{StaticResource MenuBadge}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsApplicationUpdateAvailable}" Value="True">
+                            <Setter Property="Badge" Value="{md:PackIcon Kind=ArrowUpBold}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </md:Badged.Style>
+            <md:PopupBox Style="{StaticResource MenuPopupBox}">
+                <StackPanel>
+                    <Button Command="{Binding ShowApplicationUpdateCommand}" Padding="16,0" VerticalContentAlignment="Center"
+                            Visibility="{Binding IsApplicationUpdateAvailable, Converter={StaticResource booleanToCollapsedConverter}}">
+                        <StackPanel Style="{StaticResource PopupBoxItem}">
+                            <md:PackIcon Kind="ArrowUpBold"  />
+                            <TextBlock Text="{Binding Localization.ToolbarUpdate}" />
+                        </StackPanel>
+                    </Button>
+                    <Separator Visibility="{Binding IsApplicationUpdateAvailable, Converter={StaticResource booleanToCollapsedConverter}}" />
+                    <Button Command="{Binding ImportCommand}" Padding="16,0" VerticalContentAlignment="Center">
+                        <StackPanel Style="{StaticResource PopupBoxItem}">
+                            <md:PackIcon Kind="Import"  />
+                            <TextBlock Text="{Binding Localization.ToolbarImport}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding SynchronizeCommand}" Padding="16,0" VerticalContentAlignment="Center">
+                        <StackPanel Style="{StaticResource PopupBoxItem}">
+                            <md:PackIcon Kind="Sync" />
+                            <TextBlock Text="{Binding Localization.ToolbarSynchronize}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding LibraryCommand}" Padding="16,0" VerticalContentAlignment="Center">
+                        <StackPanel Style="{StaticResource PopupBoxItem}">
+                            <md:PackIcon Kind="BookMultiple" />
+                            <TextBlock Text="{Binding Localization.ToolbarLibrary}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding DatabaseCommand}" Padding="16,0" VerticalContentAlignment="Center">
+                        <StackPanel Style="{StaticResource PopupBoxItem}">
+                            <md:PackIcon Kind="Database" />
+                            <TextBlock Text="{Binding Localization.ToolbarDatabase}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding SqlDebuggerCommand}" Padding="16,0" VerticalContentAlignment="Center"
+                            Visibility="{Binding IsSqlDebuggerMenuItemVisible, Converter={StaticResource booleanToCollapsedConverter}}">
+                        <StackPanel Style="{StaticResource PopupBoxItem}">
+                            <md:PackIcon Kind="Console" />
+                            <TextBlock Text="{Binding Localization.ToolbarSqlDebugger}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding SettingsCommand}" Padding="16,0" VerticalContentAlignment="Center">
+                        <StackPanel Style="{StaticResource PopupBoxItem}">
+                            <md:PackIcon Kind="Settings" />
+                            <TextBlock Text="{Binding Localization.ToolbarSettings}" />
+                        </StackPanel>
+                    </Button>
+                    <Separator />
+                    <Button Command="{Binding AboutCommand}" Padding="16,0" VerticalContentAlignment="Center">
+                        <StackPanel Style="{StaticResource PopupBoxItem}">
+                            <md:PackIcon Kind="HelpCircleOutline" />
+                            <TextBlock Text="{Binding Localization.ToolbarAbout}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </md:PopupBox>
+        </md:Badged>
+    </StackPanel>
+</UserControl>
